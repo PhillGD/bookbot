@@ -7,9 +7,10 @@ def main():
     print(f"--- Begin Report of {book_path} ---")
     print(f"Word Count: {word_count}")
     print("Character Count:")
-    for char in sorted(chars_dict, key=chars_dict.get, reverse=True):
+    sorted_chars_dict = sort_dict(chars_dict)
+    for char in sorted_chars_dict:
         if char.isalpha():
-            print(f"'{char}' : {chars_dict[char]}")
+            print(f"'{char}' : {sorted_chars_dict[char]}")
     print("--- End Report ---")
 
 def get_book_text(path):
@@ -28,5 +29,9 @@ def get_chars_dict(text):
         else:
             chars_dict[char] = 1
     return chars_dict
+
+def sort_dict(unsorted_dict):
+    sorted_dict = dict(sorted(unsorted_dict.items(), key=lambda item: item[1], reverse=True))
+    return sorted_dict
 
 main()
